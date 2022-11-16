@@ -7,6 +7,7 @@ function App() {
   // React States
   const [errorMessages, setErrorMessages] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [combinedName, setCombinedName] = useState();
 
   // User Login info
   const database = [
@@ -88,9 +89,13 @@ function App() {
   let uname = "";
 
   const handleChange = (event) => {
-    console.log("event.target.value", event.target.value);
+    // console.log("event.target.value", event.target.value);
+    // uname = uname.concat(event.target.value);
+
     uname = uname.concat(event.target.value);
     console.log("uname now", uname);
+    let combinedName = uname;
+    setCombinedName(combinedName);
   };
 
   // JSX code for login form
@@ -101,7 +106,8 @@ function App() {
           <label>Username </label>
           {/* todo: username field is disabled from typing */}
           {/* it gets filled out by selecting the radio buttons */}
-          <input type="text" name="uname" value={uname} required />
+          <input type="text" name="uname" value={combinedName} required />
+          <p>Username: {uname}</p>
           <div>
             {[
               "a",
