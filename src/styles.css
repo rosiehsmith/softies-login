@@ -15,7 +15,7 @@ input[type="password"] {
   border: 1px solid rgba(0, 0, 0, 0.2);
 }
 
-input[type="submit"] {
+input[type="reset"] {
   margin-top: 10px;
   cursor: pointer;
   font-size: 15px;
@@ -23,6 +23,21 @@ input[type="submit"] {
   border: 1px solid #1652c1;
   color: #fff;
   padding: 10px 20px;
+}
+
+input[type="reset"]:hover {
+  background: #6cf0c2;
+}
+
+input[type="submit"] {
+  margin-top: 10px;
+  cursor: pointer;
+  font-size: 15px;
+  background: #e5e5e5;
+  border: 1px solid #e5e5e5;
+  color: rgb(137, 133, 133);
+  padding: 10px 20px;
+  margin-right: 10px;
 }
 
 input[type="submit"]:hover {
@@ -40,13 +55,17 @@ input[type="submit"]:hover {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
+.inline-block {
+  display: inline-block;
+}
+
 .list-container {
   display: flex;
 }
 
 .error {
   color: red;
-  font-size: 12px;
+  font-size: 22px;
 }
 
 .title {
