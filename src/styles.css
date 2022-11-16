@@ -7,6 +7,7 @@
   height: 100vh;
   font-family: sans-serif;
   background-color: #f8f9fd;
+  background-image: url(../opt2.jpg);
 }
 
 input[type="text"],
@@ -27,6 +28,17 @@ input[type="reset"] {
 
 input[type="reset"]:hover {
   background: #6cf0c2;
+}
+
+#countdown {
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+  font-size: 64px;
+  background-color: white;
+}
+
+#time {
+  color: red;
 }
 
 input[type="submit"] {
@@ -53,6 +65,7 @@ input[type="submit"]:hover {
   background-color: white;
   padding: 2rem;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  opacity: 0.95;
 }
 
 .inline-block {

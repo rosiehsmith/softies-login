@@ -7,13 +7,12 @@ function App() {
   // React States
   const [errorMessages, setErrorMessages] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [combinedName, setCombinedName] = useState();
 
   // User Login info
   const database = [
     {
       username: "user",
-      password: "pass",
+      password: "p@ss",
       // passwordBackwards: "pass", todo: could make the passwords backwards
     },
   ];
@@ -56,29 +55,50 @@ function App() {
     }
   };
 
-  // todo: could count down - Resetting form in 10 seconds!
-  // const startTimer = (duration, display) => {
-  //   var timer = duration,
-  //     minutes,
-  //     seconds;
-  //   setInterval(function () {
-  //     minutes = parseInt(timer / 60, 10);
-  //     seconds = parseInt(timer % 60, 10);
+  const startTimer = (duration, display) => {
+    var timer = duration,
+      seconds;
+    setInterval(function () {
+      seconds = parseInt(timer % 60, 10);
 
-  //     minutes = minutes < 10 ? "0" + minutes : minutes;
-  //     seconds = seconds < 10 ? "0" + seconds : seconds;
+      display.textContent = seconds;
 
-  //     display.textContent = seconds;
+      if (--timer < 0) {
+        timer = duration;
 
-  //     if (--timer < 0) {
-  //       timer = duration;
-  //     }
-  //   }, 1000);
-  // };
+        let countdown = document.querySelector("#countdown");
+        let countdownSize = countdown.style["font-size"];
+        console.log("countdownSize", countdownSize);
+        if (!countdownSize) {
+          countdown.style["font-size"] = "70px";
+        } else {
+          countdown.style["font-size"] =
+            countdownSize.substring(0, countdownSize.indexOf("p")) * 1.1 + "px";
+        }
 
-  // const startupTime = 10;
-  // var display = document.querySelector("#time");
-  // startTimer(startupTime, display);
+        let form = document.forms[0];
+        form.uname.value = "";
+        form.pass.value = "";
+        form.pass1.value = "";
+        form.pass2.value = "";
+        form.consent.checked = true;
+
+        let width = form.style.width;
+        if (!width) {
+          form.style.width = "750px";
+        } else {
+          form.style.width =
+            width.substring(0, width.indexOf("p")) * 0.8 + "px";
+        }
+      }
+    }, 1000);
+  };
+
+  const timerStart = 20;
+  window.onload = function () {
+    let display = document.querySelector("#time");
+    startTimer(timerStart, display);
+  };
 
   // Generate JSX code for error message
   const renderErrorMessage = (name) =>
@@ -89,13 +109,12 @@ function App() {
   let uname = "";
 
   const handleChange = (event) => {
-    // console.log("event.target.value", event.target.value);
-    // uname = uname.concat(event.target.value);
-
-    uname = uname.concat(event.target.value);
-    console.log("uname now", uname);
-    let combinedName = uname;
-    setCombinedName(combinedName);
+    let { uname } = document.forms[0];
+    if (!uname.value) {
+      uname.value = event.target.value;
+    } else {
+      uname.value = uname.value.concat(event.target.value);
+    }
   };
 
   // JSX code for login form
@@ -104,10 +123,7 @@ function App() {
       <form onSubmit={handleSubmit}>
         <div className="input-container">
           <label>Username </label>
-          {/* todo: username field is disabled from typing */}
-          {/* it gets filled out by selecting the radio buttons */}
-          <input type="text" name="uname" value={combinedName} required />
-          <p>Username: {uname}</p>
+          <input type="text" name="uname" value={uname} required />
           <div>
             {[
               "a",
@@ -197,17 +213,16 @@ function App() {
 
   return (
     <div className="app">
-      {/* <div>
-        Reloading in <span id="time">10</span> seconds!
-      </div> */}
+      {!isSubmitted && (
+        <div id="countdown">
+          Resetting the form in <span id="time">{timerStart}</span> seconds
+        </div>
+      )}
       <div className="login-form">
         <div className="title">Sign In</div>
         {isSubmitted ? (
           <>
             <div>User is successfully logged in</div>
-            {/* <div className="button-container">
-              <input type="submit" value="Login Again" onClick={renderForm} />
-            </div> */}
           </>
         ) : (
           renderForm
