@@ -92,7 +92,7 @@ function App() {
     }, 1000);
   };
 
-  const timerStart = 20;
+  const timerStart = 30;
   window.onload = function () {
     let display = document.querySelector("#time");
     startTimer(timerStart, display);
@@ -177,7 +177,7 @@ function App() {
           <input type="password" name="pass1" required />
         </div>
         <div className="input-container">
-          <label>Confirm Password (Just In Case)</label>
+          <label>Confirm Password Again (Just In Case)</label>
           <input type="password" name="pass2" required />
         </div>
         {renderErrorMessage("pass2")}
